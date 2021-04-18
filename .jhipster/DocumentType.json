@@ -1,13 +1,9 @@
 {
   "fields": [
     {
-      "fieldName": "authorName",
+      "fieldName": "name",
       "fieldType": "String",
       "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "number",
-      "fieldType": "Integer"
     }
   ],
   "relationships": [],
@@ -16,6 +12,6 @@
   "jpaMetamodelFiltering": true,
   "readOnly": false,
   "pagination": "pagination",
-  "name": "Author",
-  "changelogDate": "20210411140205"
+  "name": "DocumentType",
+  "changelogDate": "20210418182301"
 }

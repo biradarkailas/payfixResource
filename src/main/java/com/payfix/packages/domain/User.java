@@ -2,24 +2,25 @@ package com.payfix.packages.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.payfix.packages.config.Constants;
-import java.io.Serializable;
-import java.time.Instant;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.annotations.BatchSize;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import org.apache.commons.lang3.StringUtils;
-import org.hibernate.annotations.BatchSize;
+import java.io.Serializable;
+import java.time.Instant;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
 
 /**
  * A user.
  */
 @Entity
-@Table(name = "jhi_user")
+@Table(name = "user")
 public class User extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,7 +56,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @NotNull
     @Column(nullable = false)
-    private boolean activated = false;
+    private boolean activated = true;
 
     @Size(min = 2, max = 10)
     @Column(name = "lang_key", length = 10)
@@ -82,8 +83,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @ManyToMany
     @JoinTable(
         name = "jhi_user_authority",
-        joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") },
-        inverseJoinColumns = { @JoinColumn(name = "authority_name", referencedColumnName = "name") }
+        joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+        inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")}
     )
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();

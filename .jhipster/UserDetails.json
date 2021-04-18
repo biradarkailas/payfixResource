@@ -1,0 +1,44 @@
+{
+  "fields": [
+    {
+      "fieldName": "companyName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "registrationNumber",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "registrationDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "balance",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "mobileNumber",
+      "fieldType": "Integer",
+      "fieldValidateRules": []
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "user",
+      "otherEntityName": "user",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": ["required"],
+      "otherEntityField": "login",
+      "ownerSide": true,
+      "id": true,
+      "otherEntityRelationshipName": "userDetails"
+    }
+  ],
+  "service": "serviceImpl",
+  "dto": "mapstruct",
+  "jpaMetamodelFiltering": true,
+  "readOnly": false,
+  "pagination": "pagination",
+  "name": "UserDetails",
+  "changelogDate": "20210418170851"
+}

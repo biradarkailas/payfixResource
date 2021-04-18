@@ -1,0 +1,17 @@
+{
+  "fields": [
+    {
+      "fieldName": "value",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [],
+  "service": "serviceImpl",
+  "dto": "mapstruct",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "no",
+  "name": "Duration",
+  "changelogDate": "20210418185357"
+}

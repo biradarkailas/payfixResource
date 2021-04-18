@@ -42,7 +42,19 @@
     "clientThemeVariant": "",
     "withAdminUi": true,
     "languages": ["en", "fr"],
-    "lastLiquibaseTimestamp": 1618149725000,
-    "entities": ["Author"]
+    "lastLiquibaseTimestamp": 1618772716000,
+    "entities": [
+      "UserDetails",
+      "BankAccount",
+      "DocumentType",
+      "TransactionType",
+      "PricePerDay",
+      "Document",
+      "Category",
+      "Duration",
+      "DurationUnit",
+      "WithdrawStatus",
+      "WithdrawDetails"
+    ]
   }
 }
