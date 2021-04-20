@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity MemberShip.
+    -->
+    <changeSet id="20210420173554-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="duration_id"
+                                 baseTableName="member_ship"
+                                 constraintName="fk_member_ship__duration_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="duration"/>
+
+        <addForeignKeyConstraint baseColumnNames="duration_unit_id"
+                                 baseTableName="member_ship"
+                                 constraintName="fk_member_ship__duration_unit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="duration_unit"/>
+    </changeSet>
+</databaseChangeLog>

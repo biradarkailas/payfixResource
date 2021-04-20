@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity LogoSubscription.
+    -->
+    <changeSet id="20210420182301-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="logo_subscription"
+                                 constraintName="fk_logo_subscription__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="logo_id"
+                                 baseTableName="logo_subscription"
+                                 constraintName="fk_logo_subscription__logo_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="logo"/>
+    </changeSet>
+</databaseChangeLog>

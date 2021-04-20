@@ -1,8 +1,8 @@
 package com.payfix.packages.domain;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import javax.persistence.*;
+import javax.validation.constraints.*;
 
 /**
  * A Category.
@@ -39,13 +39,13 @@ public class Category extends AbstractAuditingEntity implements Serializable {
         return this.name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Category name(String name) {
         this.name = name;
         return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
