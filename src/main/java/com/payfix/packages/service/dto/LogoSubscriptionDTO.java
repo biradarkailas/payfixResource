@@ -1,9 +1,9 @@
 package com.payfix.packages.service.dto;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
-import javax.validation.constraints.*;
 
 /**
  * A DTO for the {@link com.payfix.packages.domain.LogoSubscription} entity.
@@ -15,9 +15,9 @@ public class LogoSubscriptionDTO implements Serializable {
     @NotNull
     private LocalDate date;
 
-    private UserDTO user;
+    private Long userId;
 
-    private LogoDTO logo;
+    private Long logoId;
 
     public Long getId() {
         return id;
@@ -35,20 +35,20 @@ public class LogoSubscriptionDTO implements Serializable {
         this.date = date;
     }
 
-    public UserDTO getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(UserDTO user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public LogoDTO getLogo() {
-        return logo;
+    public Long getLogoId() {
+        return logoId;
     }
 
-    public void setLogo(LogoDTO logo) {
-        this.logo = logo;
+    public void setLogoId(Long logoId) {
+        this.logoId = logoId;
     }
 
     @Override
@@ -78,8 +78,8 @@ public class LogoSubscriptionDTO implements Serializable {
         return "LogoSubscriptionDTO{" +
             "id=" + getId() +
             ", date='" + getDate() + "'" +
-            ", user=" + getUser() +
-            ", logo=" + getLogo() +
+            ", userId=" + getUserId() +
+            ", logoId=" + getLogoId() +
             "}";
     }
 }

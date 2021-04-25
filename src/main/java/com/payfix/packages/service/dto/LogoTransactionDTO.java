@@ -1,8 +1,8 @@
 package com.payfix.packages.service.dto;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
-import javax.validation.constraints.*;
 
 /**
  * A DTO for the {@link com.payfix.packages.domain.LogoTransaction} entity.
@@ -14,11 +14,11 @@ public class LogoTransactionDTO implements Serializable {
     @NotNull
     private Double amount;
 
-    private UserDTO user;
+    private Long userId;
 
-    private LogoDTO logo;
+    private Long logoId;
 
-    private TransactionTypeDTO transactionType;
+    private Long transactionTypeId;
 
     public Long getId() {
         return id;
@@ -36,28 +36,28 @@ public class LogoTransactionDTO implements Serializable {
         this.amount = amount;
     }
 
-    public UserDTO getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(UserDTO user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public LogoDTO getLogo() {
-        return logo;
+    public Long getLogoId() {
+        return logoId;
     }
 
-    public void setLogo(LogoDTO logo) {
-        this.logo = logo;
+    public void setLogoId(Long logoId) {
+        this.logoId = logoId;
     }
 
-    public TransactionTypeDTO getTransactionType() {
-        return transactionType;
+    public Long getTransactionTypeId() {
+        return transactionTypeId;
     }
 
-    public void setTransactionType(TransactionTypeDTO transactionType) {
-        this.transactionType = transactionType;
+    public void setTransactionTypeId(Long transactionTypeId) {
+        this.transactionTypeId = transactionTypeId;
     }
 
     @Override
@@ -87,9 +87,9 @@ public class LogoTransactionDTO implements Serializable {
         return "LogoTransactionDTO{" +
             "id=" + getId() +
             ", amount=" + getAmount() +
-            ", user=" + getUser() +
-            ", logo=" + getLogo() +
-            ", transactionType=" + getTransactionType() +
+            ", userId=" + getUserId() +
+            ", logoId=" + getLogoId() +
+            ", transactionTypeId=" + getTransactionTypeId() +
             "}";
     }
 }

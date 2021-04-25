@@ -6,13 +6,14 @@ import com.payfix.packages.repository.UserRepository;
 import com.payfix.packages.service.UserDetailsService;
 import com.payfix.packages.service.dto.UserDetailsDTO;
 import com.payfix.packages.service.mapper.UserDetailsMapper;
-import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 /**
  * Service Implementation for managing {@link UserDetails}.
@@ -43,7 +44,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetailsDTO save(UserDetailsDTO userDetailsDTO) {
         log.debug("Request to save UserDetails : {}", userDetailsDTO);
         UserDetails userDetails = userDetailsMapper.toEntity(userDetailsDTO);
-        Long userId = userDetailsDTO.getUser().getId();
+        Long userId = userDetailsDTO.getUserId();
         userRepository.findById(userId).ifPresent(userDetails::user);
         userDetails = userDetailsRepository.save(userDetails);
         return userDetailsMapper.toDto(userDetails);

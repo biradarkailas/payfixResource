@@ -1,8 +1,8 @@
 package com.payfix.packages.service.dto;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
-import javax.validation.constraints.*;
 
 /**
  * A DTO for the {@link com.payfix.packages.domain.MemberShip} entity.
@@ -18,9 +18,9 @@ public class MemberShipDTO implements Serializable {
 
     private Double price;
 
-    private DurationDTO duration;
+    private Long durationId;
 
-    private DurationUnitDTO durationUnit;
+    private Long durationUnitId;
 
     public Long getId() {
         return id;
@@ -54,20 +54,20 @@ public class MemberShipDTO implements Serializable {
         this.price = price;
     }
 
-    public DurationDTO getDuration() {
-        return duration;
+    public Long getDurationId() {
+        return durationId;
     }
 
-    public void setDuration(DurationDTO duration) {
-        this.duration = duration;
+    public void setDurationId(Long durationId) {
+        this.durationId = durationId;
     }
 
-    public DurationUnitDTO getDurationUnit() {
-        return durationUnit;
+    public Long getDurationUnitId() {
+        return durationUnitId;
     }
 
-    public void setDurationUnit(DurationUnitDTO durationUnit) {
-        this.durationUnit = durationUnit;
+    public void setDurationUnitId(Long durationUnitId) {
+        this.durationUnitId = durationUnitId;
     }
 
     @Override
@@ -99,8 +99,8 @@ public class MemberShipDTO implements Serializable {
             ", title='" + getTitle() + "'" +
             ", description='" + getDescription() + "'" +
             ", price=" + getPrice() +
-            ", duration=" + getDuration() +
-            ", durationUnit=" + getDurationUnit() +
+            ", durationId=" + getDurationId() +
+            ", durationUnitId=" + getDurationUnitId() +
             "}";
     }
 }

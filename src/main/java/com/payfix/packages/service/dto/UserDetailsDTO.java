@@ -3,7 +3,6 @@ package com.payfix.packages.service.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
-import javax.validation.constraints.*;
 
 /**
  * A DTO for the {@link com.payfix.packages.domain.UserDetails} entity.
@@ -22,7 +21,7 @@ public class UserDetailsDTO implements Serializable {
 
     private Integer mobileNumber;
 
-    private UserDTO user;
+    private Long userId;
 
     public Long getId() {
         return id;
@@ -72,12 +71,12 @@ public class UserDetailsDTO implements Serializable {
         this.mobileNumber = mobileNumber;
     }
 
-    public UserDTO getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(UserDTO user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -111,7 +110,7 @@ public class UserDetailsDTO implements Serializable {
             ", registrationDate='" + getRegistrationDate() + "'" +
             ", balance=" + getBalance() +
             ", mobileNumber=" + getMobileNumber() +
-            ", user=" + getUser() +
+            ", userId=" + getUserId() +
             "}";
     }
 }

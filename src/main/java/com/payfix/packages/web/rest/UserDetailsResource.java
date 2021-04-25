@@ -6,26 +6,26 @@ import com.payfix.packages.service.UserDetailsService;
 import com.payfix.packages.service.criteria.UserDetailsCriteria;
 import com.payfix.packages.service.dto.UserDetailsDTO;
 import com.payfix.packages.web.rest.errors.BadRequestAlertException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * REST controller for managing {@link com.payfix.packages.domain.UserDetails}.
@@ -34,18 +34,13 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api")
 public class UserDetailsResource {
 
-    private final Logger log = LoggerFactory.getLogger(UserDetailsResource.class);
-
     private static final String ENTITY_NAME = "userDetails";
-
+    private final Logger log = LoggerFactory.getLogger(UserDetailsResource.class);
+    private final UserDetailsService userDetailsService;
+    private final UserDetailsRepository userDetailsRepository;
+    private final UserDetailsQueryService userDetailsQueryService;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final UserDetailsService userDetailsService;
-
-    private final UserDetailsRepository userDetailsRepository;
-
-    private final UserDetailsQueryService userDetailsQueryService;
 
     public UserDetailsResource(
         UserDetailsService userDetailsService,
@@ -70,7 +65,7 @@ public class UserDetailsResource {
         if (userDetailsDTO.getId() != null) {
             throw new BadRequestAlertException("A new userDetails cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        if (Objects.isNull(userDetailsDTO.getUser())) {
+        if (Objects.isNull(userDetailsDTO.getUserId())) {
             throw new BadRequestAlertException("Invalid association value provided", ENTITY_NAME, "null");
         }
         UserDetailsDTO result = userDetailsService.save(userDetailsDTO);
@@ -83,7 +78,7 @@ public class UserDetailsResource {
     /**
      * {@code PUT  /user-details/:id} : Updates an existing userDetails.
      *
-     * @param id the id of the userDetailsDTO to save.
+     * @param id             the id of the userDetailsDTO to save.
      * @param userDetailsDTO the userDetailsDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated userDetailsDTO,
      * or with status {@code 400 (Bad Request)} if the userDetailsDTO is not valid,
@@ -117,7 +112,7 @@ public class UserDetailsResource {
     /**
      * {@code PATCH  /user-details/:id} : Partial updates given fields of an existing userDetails, field will ignore if it is null
      *
-     * @param id the id of the userDetailsDTO to save.
+     * @param id             the id of the userDetailsDTO to save.
      * @param userDetailsDTO the userDetailsDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated userDetailsDTO,
      * or with status {@code 400 (Bad Request)} if the userDetailsDTO is not valid,

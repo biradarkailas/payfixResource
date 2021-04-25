@@ -3,7 +3,6 @@ package com.payfix.packages.service.dto;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;
-import javax.validation.constraints.*;
 
 /**
  * A DTO for the {@link com.payfix.packages.domain.WithdrawDetails} entity.
@@ -16,9 +15,9 @@ public class WithdrawDetailsDTO implements Serializable {
 
     private ZonedDateTime date;
 
-    private UserDTO user;
+    private Long userId;
 
-    private WithdrawStatusDTO withdrawStatus;
+    private Long withdrawStatusId;
 
     public Long getId() {
         return id;
@@ -44,20 +43,20 @@ public class WithdrawDetailsDTO implements Serializable {
         this.date = date;
     }
 
-    public UserDTO getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(UserDTO user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public WithdrawStatusDTO getWithdrawStatus() {
-        return withdrawStatus;
+    public Long getWithdrawStatusId() {
+        return withdrawStatusId;
     }
 
-    public void setWithdrawStatus(WithdrawStatusDTO withdrawStatus) {
-        this.withdrawStatus = withdrawStatus;
+    public void setWithdrawStatusId(Long withdrawStatusId) {
+        this.withdrawStatusId = withdrawStatusId;
     }
 
     @Override
@@ -88,8 +87,8 @@ public class WithdrawDetailsDTO implements Serializable {
             "id=" + getId() +
             ", amount=" + getAmount() +
             ", date='" + getDate() + "'" +
-            ", user=" + getUser() +
-            ", withdrawStatus=" + getWithdrawStatus() +
+            ", userId=" + getUserId() +
+            ", withdrawStatusId=" + getWithdrawStatusId() +
             "}";
     }
 }

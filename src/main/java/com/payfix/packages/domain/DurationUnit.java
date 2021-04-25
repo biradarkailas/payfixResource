@@ -1,8 +1,11 @@
 package com.payfix.packages.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import javax.persistence.*;
-import javax.validation.constraints.*;
 
 /**
  * A DurationUnit.
@@ -14,7 +17,6 @@ public class DurationUnit implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -46,17 +48,21 @@ public class DurationUnit implements Serializable {
         return this.unitValue;
     }
 
+    public void setUnitValue(Integer unitValue) {
+        this.unitValue = unitValue;
+    }
+
     public DurationUnit unitValue(Integer unitValue) {
         this.unitValue = unitValue;
         return this;
     }
 
-    public void setUnitValue(Integer unitValue) {
-        this.unitValue = unitValue;
-    }
-
     public String getAlies() {
         return this.alies;
+    }
+
+    public void setAlies(String alies) {
+        this.alies = alies;
     }
 
     public DurationUnit alies(String alies) {
@@ -64,21 +70,17 @@ public class DurationUnit implements Serializable {
         return this;
     }
 
-    public void setAlies(String alies) {
-        this.alies = alies;
-    }
-
     public String getName() {
         return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public DurationUnit name(String name) {
         this.name = name;
         return this;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

@@ -15,9 +15,11 @@ public class UserMemberShipDTO implements Serializable {
 
     private LocalDate endDate;
 
-    private UserDTO user;
+    private Long userId;
 
-    private MemberShipDTO memberShip;
+    private String userName;
+
+    private Long memberShipId;
 
     public Long getId() {
         return id;
@@ -43,20 +45,20 @@ public class UserMemberShipDTO implements Serializable {
         this.endDate = endDate;
     }
 
-    public UserDTO getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(UserDTO user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public MemberShipDTO getMemberShip() {
-        return memberShip;
+    public Long getMemberShipId() {
+        return memberShipId;
     }
 
-    public void setMemberShip(MemberShipDTO memberShip) {
-        this.memberShip = memberShip;
+    public void setMemberShipId(Long memberShipId) {
+        this.memberShipId = memberShipId;
     }
 
     @Override
@@ -87,8 +89,8 @@ public class UserMemberShipDTO implements Serializable {
             "id=" + getId() +
             ", startDate='" + getStartDate() + "'" +
             ", endDate='" + getEndDate() + "'" +
-            ", user=" + getUser() +
-            ", memberShip=" + getMemberShip() +
+            ", userId=" + getUserId() +
+            ", memberShipId=" + getMemberShipId() +
             "}";
     }
 }

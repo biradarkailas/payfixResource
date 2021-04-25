@@ -1,8 +1,8 @@
 package com.payfix.packages.service.dto;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
-import javax.validation.constraints.*;
 
 /**
  * A DTO for the {@link com.payfix.packages.domain.Logo} entity.
@@ -18,15 +18,15 @@ public class LogoDTO implements Serializable {
 
     private String about;
 
-    private UserDTO user;
+    private Long userId;
 
-    private CategoryDTO category;
+    private Long categoryId;
 
-    private DurationDTO duration;
+    private Long durationId;
 
-    private DurationUnitDTO durationUnit;
+    private Long durationUnitId;
 
-    private PricePerDayDTO pricePerDay;
+    private Long pricePerDayId;
 
     public Long getId() {
         return id;
@@ -60,44 +60,44 @@ public class LogoDTO implements Serializable {
         this.about = about;
     }
 
-    public UserDTO getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(UserDTO user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public CategoryDTO getCategory() {
-        return category;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(CategoryDTO category) {
-        this.category = category;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public DurationDTO getDuration() {
-        return duration;
+    public Long getDurationId() {
+        return durationId;
     }
 
-    public void setDuration(DurationDTO duration) {
-        this.duration = duration;
+    public void setDurationId(Long durationId) {
+        this.durationId = durationId;
     }
 
-    public DurationUnitDTO getDurationUnit() {
-        return durationUnit;
+    public Long getDurationUnitId() {
+        return durationUnitId;
     }
 
-    public void setDurationUnit(DurationUnitDTO durationUnit) {
-        this.durationUnit = durationUnit;
+    public void setDurationUnitId(Long durationUnitId) {
+        this.durationUnitId = durationUnitId;
     }
 
-    public PricePerDayDTO getPricePerDay() {
-        return pricePerDay;
+    public Long getPricePerDayId() {
+        return pricePerDayId;
     }
 
-    public void setPricePerDay(PricePerDayDTO pricePerDay) {
-        this.pricePerDay = pricePerDay;
+    public void setPricePerDayId(Long pricePerDayId) {
+        this.pricePerDayId = pricePerDayId;
     }
 
     @Override
@@ -129,11 +129,11 @@ public class LogoDTO implements Serializable {
             ", imageUrl='" + getImageUrl() + "'" +
             ", termConditions='" + getTermConditions() + "'" +
             ", about='" + getAbout() + "'" +
-            ", user=" + getUser() +
-            ", category=" + getCategory() +
-            ", duration=" + getDuration() +
-            ", durationUnit=" + getDurationUnit() +
-            ", pricePerDay=" + getPricePerDay() +
+            ", user=" + getUserId() +
+            ", category=" + getCategoryId() +
+            ", duration=" + getDurationId() +
+            ", durationUnit=" + getDurationUnitId() +
+            ", pricePerDay=" + getPricePerDayId() +
             "}";
     }
 }
