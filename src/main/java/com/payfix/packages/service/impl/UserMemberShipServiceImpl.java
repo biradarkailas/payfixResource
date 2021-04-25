@@ -5,14 +5,15 @@ import com.payfix.packages.repository.UserMemberShipRepository;
 import com.payfix.packages.service.UserMemberShipService;
 import com.payfix.packages.service.dto.UserMemberShipDTO;
 import com.payfix.packages.service.mapper.UserMemberShipMapper;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link UserMemberShip}.
@@ -38,22 +39,6 @@ public class UserMemberShipServiceImpl implements UserMemberShipService {
         UserMemberShip userMemberShip = userMemberShipMapper.toEntity(userMemberShipDTO);
         userMemberShip = userMemberShipRepository.save(userMemberShip);
         return userMemberShipMapper.toDto(userMemberShip);
-    }
-
-    @Override
-    public Optional<UserMemberShipDTO> partialUpdate(UserMemberShipDTO userMemberShipDTO) {
-        log.debug("Request to partially update UserMemberShip : {}", userMemberShipDTO);
-
-        return userMemberShipRepository
-            .findById(userMemberShipDTO.getId())
-            .map(
-                existingUserMemberShip -> {
-                    userMemberShipMapper.partialUpdate(existingUserMemberShip, userMemberShipDTO);
-                    return existingUserMemberShip;
-                }
-            )
-            .map(userMemberShipRepository::save)
-            .map(userMemberShipMapper::toDto);
     }
 
     @Override

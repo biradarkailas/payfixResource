@@ -18,14 +18,6 @@ public interface DocumentTypeService {
     DocumentTypeDTO save(DocumentTypeDTO documentTypeDTO);
 
     /**
-     * Partially updates a documentType.
-     *
-     * @param documentTypeDTO the entity to update partially.
-     * @return the persisted entity.
-     */
-    Optional<DocumentTypeDTO> partialUpdate(DocumentTypeDTO documentTypeDTO);
-
-    /**
      * Get all the documentTypes.
      *
      * @param pageable the pagination information.

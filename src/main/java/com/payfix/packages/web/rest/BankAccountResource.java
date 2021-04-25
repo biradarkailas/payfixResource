@@ -6,26 +6,25 @@ import com.payfix.packages.service.BankAccountService;
 import com.payfix.packages.service.criteria.BankAccountCriteria;
 import com.payfix.packages.service.dto.BankAccountDTO;
 import com.payfix.packages.web.rest.errors.BadRequestAlertException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * REST controller for managing {@link com.payfix.packages.domain.BankAccount}.
@@ -34,18 +33,13 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api")
 public class BankAccountResource {
 
-    private final Logger log = LoggerFactory.getLogger(BankAccountResource.class);
-
     private static final String ENTITY_NAME = "bankAccount";
-
+    private final Logger log = LoggerFactory.getLogger(BankAccountResource.class);
+    private final BankAccountService bankAccountService;
+    private final BankAccountRepository bankAccountRepository;
+    private final BankAccountQueryService bankAccountQueryService;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final BankAccountService bankAccountService;
-
-    private final BankAccountRepository bankAccountRepository;
-
-    private final BankAccountQueryService bankAccountQueryService;
 
     public BankAccountResource(
         BankAccountService bankAccountService,
@@ -80,7 +74,7 @@ public class BankAccountResource {
     /**
      * {@code PUT  /bank-accounts/:id} : Updates an existing bankAccount.
      *
-     * @param id the id of the bankAccountDTO to save.
+     * @param id             the id of the bankAccountDTO to save.
      * @param bankAccountDTO the bankAccountDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated bankAccountDTO,
      * or with status {@code 400 (Bad Request)} if the bankAccountDTO is not valid,
@@ -109,42 +103,6 @@ public class BankAccountResource {
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, bankAccountDTO.getId().toString()))
             .body(result);
-    }
-
-    /**
-     * {@code PATCH  /bank-accounts/:id} : Partial updates given fields of an existing bankAccount, field will ignore if it is null
-     *
-     * @param id the id of the bankAccountDTO to save.
-     * @param bankAccountDTO the bankAccountDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated bankAccountDTO,
-     * or with status {@code 400 (Bad Request)} if the bankAccountDTO is not valid,
-     * or with status {@code 404 (Not Found)} if the bankAccountDTO is not found,
-     * or with status {@code 500 (Internal Server Error)} if the bankAccountDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PatchMapping(value = "/bank-accounts/{id}", consumes = "application/merge-patch+json")
-    public ResponseEntity<BankAccountDTO> partialUpdateBankAccount(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody BankAccountDTO bankAccountDTO
-    ) throws URISyntaxException {
-        log.debug("REST request to partial update BankAccount partially : {}, {}", id, bankAccountDTO);
-        if (bankAccountDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, bankAccountDTO.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!bankAccountRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        Optional<BankAccountDTO> result = bankAccountService.partialUpdate(bankAccountDTO);
-
-        return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, bankAccountDTO.getId().toString())
-        );
     }
 
     /**

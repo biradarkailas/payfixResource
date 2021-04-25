@@ -6,26 +6,25 @@ import com.payfix.packages.service.DocumentTypeService;
 import com.payfix.packages.service.criteria.DocumentTypeCriteria;
 import com.payfix.packages.service.dto.DocumentTypeDTO;
 import com.payfix.packages.web.rest.errors.BadRequestAlertException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * REST controller for managing {@link com.payfix.packages.domain.DocumentType}.
@@ -34,18 +33,13 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api")
 public class DocumentTypeResource {
 
-    private final Logger log = LoggerFactory.getLogger(DocumentTypeResource.class);
-
     private static final String ENTITY_NAME = "documentType";
-
+    private final Logger log = LoggerFactory.getLogger(DocumentTypeResource.class);
+    private final DocumentTypeService documentTypeService;
+    private final DocumentTypeRepository documentTypeRepository;
+    private final DocumentTypeQueryService documentTypeQueryService;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final DocumentTypeService documentTypeService;
-
-    private final DocumentTypeRepository documentTypeRepository;
-
-    private final DocumentTypeQueryService documentTypeQueryService;
 
     public DocumentTypeResource(
         DocumentTypeService documentTypeService,
@@ -81,7 +75,7 @@ public class DocumentTypeResource {
     /**
      * {@code PUT  /document-types/:id} : Updates an existing documentType.
      *
-     * @param id the id of the documentTypeDTO to save.
+     * @param id              the id of the documentTypeDTO to save.
      * @param documentTypeDTO the documentTypeDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated documentTypeDTO,
      * or with status {@code 400 (Bad Request)} if the documentTypeDTO is not valid,
@@ -110,42 +104,6 @@ public class DocumentTypeResource {
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, documentTypeDTO.getId().toString()))
             .body(result);
-    }
-
-    /**
-     * {@code PATCH  /document-types/:id} : Partial updates given fields of an existing documentType, field will ignore if it is null
-     *
-     * @param id the id of the documentTypeDTO to save.
-     * @param documentTypeDTO the documentTypeDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated documentTypeDTO,
-     * or with status {@code 400 (Bad Request)} if the documentTypeDTO is not valid,
-     * or with status {@code 404 (Not Found)} if the documentTypeDTO is not found,
-     * or with status {@code 500 (Internal Server Error)} if the documentTypeDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PatchMapping(value = "/document-types/{id}", consumes = "application/merge-patch+json")
-    public ResponseEntity<DocumentTypeDTO> partialUpdateDocumentType(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody DocumentTypeDTO documentTypeDTO
-    ) throws URISyntaxException {
-        log.debug("REST request to partial update DocumentType partially : {}, {}", id, documentTypeDTO);
-        if (documentTypeDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, documentTypeDTO.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!documentTypeRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        Optional<DocumentTypeDTO> result = documentTypeService.partialUpdate(documentTypeDTO);
-
-        return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, documentTypeDTO.getId().toString())
-        );
     }
 
     /**

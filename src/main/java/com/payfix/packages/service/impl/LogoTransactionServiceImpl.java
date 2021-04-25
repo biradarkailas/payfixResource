@@ -5,14 +5,15 @@ import com.payfix.packages.repository.LogoTransactionRepository;
 import com.payfix.packages.service.LogoTransactionService;
 import com.payfix.packages.service.dto.LogoTransactionDTO;
 import com.payfix.packages.service.mapper.LogoTransactionMapper;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link LogoTransaction}.
@@ -38,22 +39,6 @@ public class LogoTransactionServiceImpl implements LogoTransactionService {
         LogoTransaction logoTransaction = logoTransactionMapper.toEntity(logoTransactionDTO);
         logoTransaction = logoTransactionRepository.save(logoTransaction);
         return logoTransactionMapper.toDto(logoTransaction);
-    }
-
-    @Override
-    public Optional<LogoTransactionDTO> partialUpdate(LogoTransactionDTO logoTransactionDTO) {
-        log.debug("Request to partially update LogoTransaction : {}", logoTransactionDTO);
-
-        return logoTransactionRepository
-            .findById(logoTransactionDTO.getId())
-            .map(
-                existingLogoTransaction -> {
-                    logoTransactionMapper.partialUpdate(existingLogoTransaction, logoTransactionDTO);
-                    return existingLogoTransaction;
-                }
-            )
-            .map(logoTransactionRepository::save)
-            .map(logoTransactionMapper::toDto);
     }
 
     @Override

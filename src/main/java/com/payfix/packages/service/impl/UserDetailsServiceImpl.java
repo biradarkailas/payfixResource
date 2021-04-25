@@ -51,22 +51,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Override
-    public Optional<UserDetailsDTO> partialUpdate(UserDetailsDTO userDetailsDTO) {
-        log.debug("Request to partially update UserDetails : {}", userDetailsDTO);
-
-        return userDetailsRepository
-            .findById(userDetailsDTO.getId())
-            .map(
-                existingUserDetails -> {
-                    userDetailsMapper.partialUpdate(existingUserDetails, userDetailsDTO);
-                    return existingUserDetails;
-                }
-            )
-            .map(userDetailsRepository::save)
-            .map(userDetailsMapper::toDto);
-    }
-
-    @Override
     @Transactional(readOnly = true)
     public Page<UserDetailsDTO> findAll(Pageable pageable) {
         log.debug("Request to get all UserDetails");

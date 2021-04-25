@@ -41,22 +41,6 @@ public class DurationUnitServiceImpl implements DurationUnitService {
     }
 
     @Override
-    public Optional<DurationUnitDTO> partialUpdate(DurationUnitDTO durationUnitDTO) {
-        log.debug("Request to partially update DurationUnit : {}", durationUnitDTO);
-
-        return durationUnitRepository
-            .findById(durationUnitDTO.getId())
-            .map(
-                existingDurationUnit -> {
-                    durationUnitMapper.partialUpdate(existingDurationUnit, durationUnitDTO);
-                    return existingDurationUnit;
-                }
-            )
-            .map(durationUnitRepository::save)
-            .map(durationUnitMapper::toDto);
-    }
-
-    @Override
     @Transactional(readOnly = true)
     public List<DurationUnitDTO> findAll() {
         log.debug("Request to get all DurationUnits");

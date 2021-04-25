@@ -103,42 +103,6 @@ public class MemberShipResource {
     }
 
     /**
-     * {@code PATCH  /member-ships/:id} : Partial updates given fields of an existing memberShip, field will ignore if it is null
-     *
-     * @param id the id of the memberShipDTO to save.
-     * @param memberShipDTO the memberShipDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated memberShipDTO,
-     * or with status {@code 400 (Bad Request)} if the memberShipDTO is not valid,
-     * or with status {@code 404 (Not Found)} if the memberShipDTO is not found,
-     * or with status {@code 500 (Internal Server Error)} if the memberShipDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PatchMapping(value = "/member-ships/{id}", consumes = "application/merge-patch+json")
-    public ResponseEntity<MemberShipDTO> partialUpdateMemberShip(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody MemberShipDTO memberShipDTO
-    ) throws URISyntaxException {
-        log.debug("REST request to partial update MemberShip partially : {}, {}", id, memberShipDTO);
-        if (memberShipDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, memberShipDTO.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!memberShipRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        Optional<MemberShipDTO> result = memberShipService.partialUpdate(memberShipDTO);
-
-        return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, memberShipDTO.getId().toString())
-        );
-    }
-
-    /**
      * {@code GET  /member-ships} : get all the memberShips.
      *
      * @param pageable the pagination information.

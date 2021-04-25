@@ -5,14 +5,15 @@ import com.payfix.packages.repository.LogoSubscriptionRepository;
 import com.payfix.packages.service.LogoSubscriptionService;
 import com.payfix.packages.service.dto.LogoSubscriptionDTO;
 import com.payfix.packages.service.mapper.LogoSubscriptionMapper;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link LogoSubscription}.
@@ -41,22 +42,6 @@ public class LogoSubscriptionServiceImpl implements LogoSubscriptionService {
         LogoSubscription logoSubscription = logoSubscriptionMapper.toEntity(logoSubscriptionDTO);
         logoSubscription = logoSubscriptionRepository.save(logoSubscription);
         return logoSubscriptionMapper.toDto(logoSubscription);
-    }
-
-    @Override
-    public Optional<LogoSubscriptionDTO> partialUpdate(LogoSubscriptionDTO logoSubscriptionDTO) {
-        log.debug("Request to partially update LogoSubscription : {}", logoSubscriptionDTO);
-
-        return logoSubscriptionRepository
-            .findById(logoSubscriptionDTO.getId())
-            .map(
-                existingLogoSubscription -> {
-                    logoSubscriptionMapper.partialUpdate(existingLogoSubscription, logoSubscriptionDTO);
-                    return existingLogoSubscription;
-                }
-            )
-            .map(logoSubscriptionRepository::save)
-            .map(logoSubscriptionMapper::toDto);
     }
 
     @Override

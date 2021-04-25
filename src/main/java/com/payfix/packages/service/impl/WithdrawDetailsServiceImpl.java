@@ -5,13 +5,14 @@ import com.payfix.packages.repository.WithdrawDetailsRepository;
 import com.payfix.packages.service.WithdrawDetailsService;
 import com.payfix.packages.service.dto.WithdrawDetailsDTO;
 import com.payfix.packages.service.mapper.WithdrawDetailsMapper;
-import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 /**
  * Service Implementation for managing {@link WithdrawDetails}.
@@ -37,22 +38,6 @@ public class WithdrawDetailsServiceImpl implements WithdrawDetailsService {
         WithdrawDetails withdrawDetails = withdrawDetailsMapper.toEntity(withdrawDetailsDTO);
         withdrawDetails = withdrawDetailsRepository.save(withdrawDetails);
         return withdrawDetailsMapper.toDto(withdrawDetails);
-    }
-
-    @Override
-    public Optional<WithdrawDetailsDTO> partialUpdate(WithdrawDetailsDTO withdrawDetailsDTO) {
-        log.debug("Request to partially update WithdrawDetails : {}", withdrawDetailsDTO);
-
-        return withdrawDetailsRepository
-            .findById(withdrawDetailsDTO.getId())
-            .map(
-                existingWithdrawDetails -> {
-                    withdrawDetailsMapper.partialUpdate(existingWithdrawDetails, withdrawDetailsDTO);
-                    return existingWithdrawDetails;
-                }
-            )
-            .map(withdrawDetailsRepository::save)
-            .map(withdrawDetailsMapper::toDto);
     }
 
     @Override

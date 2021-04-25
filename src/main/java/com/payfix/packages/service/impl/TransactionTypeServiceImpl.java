@@ -41,22 +41,6 @@ public class TransactionTypeServiceImpl implements TransactionTypeService {
     }
 
     @Override
-    public Optional<TransactionTypeDTO> partialUpdate(TransactionTypeDTO transactionTypeDTO) {
-        log.debug("Request to partially update TransactionType : {}", transactionTypeDTO);
-
-        return transactionTypeRepository
-            .findById(transactionTypeDTO.getId())
-            .map(
-                existingTransactionType -> {
-                    transactionTypeMapper.partialUpdate(existingTransactionType, transactionTypeDTO);
-                    return existingTransactionType;
-                }
-            )
-            .map(transactionTypeRepository::save)
-            .map(transactionTypeMapper::toDto);
-    }
-
-    @Override
     @Transactional(readOnly = true)
     public List<TransactionTypeDTO> findAll() {
         log.debug("Request to get all TransactionTypes");

@@ -18,14 +18,6 @@ public interface LogoService {
     LogoDTO save(LogoDTO logoDTO);
 
     /**
-     * Partially updates a logo.
-     *
-     * @param logoDTO the entity to update partially.
-     * @return the persisted entity.
-     */
-    Optional<LogoDTO> partialUpdate(LogoDTO logoDTO);
-
-    /**
      * Get all the logos.
      *
      * @param pageable the pagination information.

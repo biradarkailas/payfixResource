@@ -40,22 +40,6 @@ public class LogoServiceImpl implements LogoService {
     }
 
     @Override
-    public Optional<LogoDTO> partialUpdate(LogoDTO logoDTO) {
-        log.debug("Request to partially update Logo : {}", logoDTO);
-
-        return logoRepository
-            .findById(logoDTO.getId())
-            .map(
-                existingLogo -> {
-                    logoMapper.partialUpdate(existingLogo, logoDTO);
-                    return existingLogo;
-                }
-            )
-            .map(logoRepository::save)
-            .map(logoMapper::toDto);
-    }
-
-    @Override
     @Transactional(readOnly = true)
     public Page<LogoDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Logos");

@@ -17,14 +17,6 @@ public interface DurationService {
     DurationDTO save(DurationDTO durationDTO);
 
     /**
-     * Partially updates a duration.
-     *
-     * @param durationDTO the entity to update partially.
-     * @return the persisted entity.
-     */
-    Optional<DurationDTO> partialUpdate(DurationDTO durationDTO);
-
-    /**
      * Get all the durations.
      *
      * @return the list of entities.

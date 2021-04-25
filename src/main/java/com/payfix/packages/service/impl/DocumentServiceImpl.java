@@ -40,22 +40,6 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
-    public Optional<DocumentDTO> partialUpdate(DocumentDTO documentDTO) {
-        log.debug("Request to partially update Document : {}", documentDTO);
-
-        return documentRepository
-            .findById(documentDTO.getId())
-            .map(
-                existingDocument -> {
-                    documentMapper.partialUpdate(existingDocument, documentDTO);
-                    return existingDocument;
-                }
-            )
-            .map(documentRepository::save)
-            .map(documentMapper::toDto);
-    }
-
-    @Override
     @Transactional(readOnly = true)
     public Page<DocumentDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Documents");

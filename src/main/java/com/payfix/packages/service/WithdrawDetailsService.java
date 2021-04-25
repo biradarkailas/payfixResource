@@ -1,9 +1,10 @@
 package com.payfix.packages.service;
 
 import com.payfix.packages.service.dto.WithdrawDetailsDTO;
-import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.Optional;
 
 /**
  * Service Interface for managing {@link com.payfix.packages.domain.WithdrawDetails}.
@@ -16,14 +17,6 @@ public interface WithdrawDetailsService {
      * @return the persisted entity.
      */
     WithdrawDetailsDTO save(WithdrawDetailsDTO withdrawDetailsDTO);
-
-    /**
-     * Partially updates a withdrawDetails.
-     *
-     * @param withdrawDetailsDTO the entity to update partially.
-     * @return the persisted entity.
-     */
-    Optional<WithdrawDetailsDTO> partialUpdate(WithdrawDetailsDTO withdrawDetailsDTO);
 
     /**
      * Get all the withdrawDetails.

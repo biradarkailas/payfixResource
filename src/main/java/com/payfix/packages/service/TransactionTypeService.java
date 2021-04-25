@@ -17,14 +17,6 @@ public interface TransactionTypeService {
     TransactionTypeDTO save(TransactionTypeDTO transactionTypeDTO);
 
     /**
-     * Partially updates a transactionType.
-     *
-     * @param transactionTypeDTO the entity to update partially.
-     * @return the persisted entity.
-     */
-    Optional<TransactionTypeDTO> partialUpdate(TransactionTypeDTO transactionTypeDTO);
-
-    /**
      * Get all the transactionTypes.
      *
      * @return the list of entities.

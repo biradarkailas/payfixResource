@@ -17,14 +17,6 @@ public interface LogoSubscriptionService {
     LogoSubscriptionDTO save(LogoSubscriptionDTO logoSubscriptionDTO);
 
     /**
-     * Partially updates a logoSubscription.
-     *
-     * @param logoSubscriptionDTO the entity to update partially.
-     * @return the persisted entity.
-     */
-    Optional<LogoSubscriptionDTO> partialUpdate(LogoSubscriptionDTO logoSubscriptionDTO);
-
-    /**
      * Get all the logoSubscriptions.
      *
      * @return the list of entities.

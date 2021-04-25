@@ -18,14 +18,6 @@ public interface DocumentService {
     DocumentDTO save(DocumentDTO documentDTO);
 
     /**
-     * Partially updates a document.
-     *
-     * @param documentDTO the entity to update partially.
-     * @return the persisted entity.
-     */
-    Optional<DocumentDTO> partialUpdate(DocumentDTO documentDTO);
-
-    /**
      * Get all the documents.
      *
      * @param pageable the pagination information.

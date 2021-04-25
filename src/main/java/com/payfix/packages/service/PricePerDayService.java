@@ -1,9 +1,10 @@
 package com.payfix.packages.service;
 
 import com.payfix.packages.service.dto.PricePerDayDTO;
-import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.Optional;
 
 /**
  * Service Interface for managing {@link com.payfix.packages.domain.PricePerDay}.
@@ -16,14 +17,6 @@ public interface PricePerDayService {
      * @return the persisted entity.
      */
     PricePerDayDTO save(PricePerDayDTO pricePerDayDTO);
-
-    /**
-     * Partially updates a pricePerDay.
-     *
-     * @param pricePerDayDTO the entity to update partially.
-     * @return the persisted entity.
-     */
-    Optional<PricePerDayDTO> partialUpdate(PricePerDayDTO pricePerDayDTO);
 
     /**
      * Get all the pricePerDays.

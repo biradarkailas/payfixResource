@@ -40,22 +40,6 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
-    public Optional<BankAccountDTO> partialUpdate(BankAccountDTO bankAccountDTO) {
-        log.debug("Request to partially update BankAccount : {}", bankAccountDTO);
-
-        return bankAccountRepository
-            .findById(bankAccountDTO.getId())
-            .map(
-                existingBankAccount -> {
-                    bankAccountMapper.partialUpdate(existingBankAccount, bankAccountDTO);
-                    return existingBankAccount;
-                }
-            )
-            .map(bankAccountRepository::save)
-            .map(bankAccountMapper::toDto);
-    }
-
-    @Override
     @Transactional(readOnly = true)
     public Page<BankAccountDTO> findAll(Pageable pageable) {
         log.debug("Request to get all BankAccounts");

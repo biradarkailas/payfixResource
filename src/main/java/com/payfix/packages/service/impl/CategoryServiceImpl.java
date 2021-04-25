@@ -41,22 +41,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Optional<CategoryDTO> partialUpdate(CategoryDTO categoryDTO) {
-        log.debug("Request to partially update Category : {}", categoryDTO);
-
-        return categoryRepository
-            .findById(categoryDTO.getId())
-            .map(
-                existingCategory -> {
-                    categoryMapper.partialUpdate(existingCategory, categoryDTO);
-                    return existingCategory;
-                }
-            )
-            .map(categoryRepository::save)
-            .map(categoryMapper::toDto);
-    }
-
-    @Override
     @Transactional(readOnly = true)
     public List<CategoryDTO> findAll() {
         log.debug("Request to get all Categories");

@@ -18,14 +18,6 @@ public interface MemberShipService {
     MemberShipDTO save(MemberShipDTO memberShipDTO);
 
     /**
-     * Partially updates a memberShip.
-     *
-     * @param memberShipDTO the entity to update partially.
-     * @return the persisted entity.
-     */
-    Optional<MemberShipDTO> partialUpdate(MemberShipDTO memberShipDTO);
-
-    /**
      * Get all the memberShips.
      *
      * @param pageable the pagination information.

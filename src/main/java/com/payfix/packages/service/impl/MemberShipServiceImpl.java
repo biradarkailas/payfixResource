@@ -5,13 +5,14 @@ import com.payfix.packages.repository.MemberShipRepository;
 import com.payfix.packages.service.MemberShipService;
 import com.payfix.packages.service.dto.MemberShipDTO;
 import com.payfix.packages.service.mapper.MemberShipMapper;
-import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 /**
  * Service Implementation for managing {@link MemberShip}.
@@ -37,22 +38,6 @@ public class MemberShipServiceImpl implements MemberShipService {
         MemberShip memberShip = memberShipMapper.toEntity(memberShipDTO);
         memberShip = memberShipRepository.save(memberShip);
         return memberShipMapper.toDto(memberShip);
-    }
-
-    @Override
-    public Optional<MemberShipDTO> partialUpdate(MemberShipDTO memberShipDTO) {
-        log.debug("Request to partially update MemberShip : {}", memberShipDTO);
-
-        return memberShipRepository
-            .findById(memberShipDTO.getId())
-            .map(
-                existingMemberShip -> {
-                    memberShipMapper.partialUpdate(existingMemberShip, memberShipDTO);
-                    return existingMemberShip;
-                }
-            )
-            .map(memberShipRepository::save)
-            .map(memberShipMapper::toDto);
     }
 
     @Override

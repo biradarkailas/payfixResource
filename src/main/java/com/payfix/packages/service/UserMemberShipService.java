@@ -17,14 +17,6 @@ public interface UserMemberShipService {
     UserMemberShipDTO save(UserMemberShipDTO userMemberShipDTO);
 
     /**
-     * Partially updates a userMemberShip.
-     *
-     * @param userMemberShipDTO the entity to update partially.
-     * @return the persisted entity.
-     */
-    Optional<UserMemberShipDTO> partialUpdate(UserMemberShipDTO userMemberShipDTO);
-
-    /**
      * Get all the userMemberShips.
      *
      * @return the list of entities.

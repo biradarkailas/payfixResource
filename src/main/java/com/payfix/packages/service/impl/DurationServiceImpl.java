@@ -39,23 +39,6 @@ public class DurationServiceImpl implements DurationService {
         duration = durationRepository.save(duration);
         return durationMapper.toDto(duration);
     }
-
-    @Override
-    public Optional<DurationDTO> partialUpdate(DurationDTO durationDTO) {
-        log.debug("Request to partially update Duration : {}", durationDTO);
-
-        return durationRepository
-            .findById(durationDTO.getId())
-            .map(
-                existingDuration -> {
-                    durationMapper.partialUpdate(existingDuration, durationDTO);
-                    return existingDuration;
-                }
-            )
-            .map(durationRepository::save)
-            .map(durationMapper::toDto);
-    }
-
     @Override
     @Transactional(readOnly = true)
     public List<DurationDTO> findAll() {

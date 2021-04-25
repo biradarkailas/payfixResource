@@ -6,13 +6,6 @@ import com.payfix.packages.service.DurationUnitService;
 import com.payfix.packages.service.criteria.DurationUnitCriteria;
 import com.payfix.packages.service.dto.DurationUnitDTO;
 import com.payfix.packages.web.rest.errors.BadRequestAlertException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +14,13 @@ import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 /**
  * REST controller for managing {@link com.payfix.packages.domain.DurationUnit}.
  */
@@ -28,18 +28,13 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api")
 public class DurationUnitResource {
 
-    private final Logger log = LoggerFactory.getLogger(DurationUnitResource.class);
-
     private static final String ENTITY_NAME = "durationUnit";
-
+    private final Logger log = LoggerFactory.getLogger(DurationUnitResource.class);
+    private final DurationUnitService durationUnitService;
+    private final DurationUnitRepository durationUnitRepository;
+    private final DurationUnitQueryService durationUnitQueryService;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final DurationUnitService durationUnitService;
-
-    private final DurationUnitRepository durationUnitRepository;
-
-    private final DurationUnitQueryService durationUnitQueryService;
 
     public DurationUnitResource(
         DurationUnitService durationUnitService,
@@ -75,7 +70,7 @@ public class DurationUnitResource {
     /**
      * {@code PUT  /duration-units/:id} : Updates an existing durationUnit.
      *
-     * @param id the id of the durationUnitDTO to save.
+     * @param id              the id of the durationUnitDTO to save.
      * @param durationUnitDTO the durationUnitDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated durationUnitDTO,
      * or with status {@code 400 (Bad Request)} if the durationUnitDTO is not valid,
@@ -104,42 +99,6 @@ public class DurationUnitResource {
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, durationUnitDTO.getId().toString()))
             .body(result);
-    }
-
-    /**
-     * {@code PATCH  /duration-units/:id} : Partial updates given fields of an existing durationUnit, field will ignore if it is null
-     *
-     * @param id the id of the durationUnitDTO to save.
-     * @param durationUnitDTO the durationUnitDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated durationUnitDTO,
-     * or with status {@code 400 (Bad Request)} if the durationUnitDTO is not valid,
-     * or with status {@code 404 (Not Found)} if the durationUnitDTO is not found,
-     * or with status {@code 500 (Internal Server Error)} if the durationUnitDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PatchMapping(value = "/duration-units/{id}", consumes = "application/merge-patch+json")
-    public ResponseEntity<DurationUnitDTO> partialUpdateDurationUnit(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody DurationUnitDTO durationUnitDTO
-    ) throws URISyntaxException {
-        log.debug("REST request to partial update DurationUnit partially : {}, {}", id, durationUnitDTO);
-        if (durationUnitDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, durationUnitDTO.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!durationUnitRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        Optional<DurationUnitDTO> result = durationUnitService.partialUpdate(durationUnitDTO);
-
-        return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, durationUnitDTO.getId().toString())
-        );
     }
 
     /**

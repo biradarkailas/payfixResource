@@ -4,13 +4,6 @@ import com.payfix.packages.repository.WithdrawStatusRepository;
 import com.payfix.packages.service.WithdrawStatusService;
 import com.payfix.packages.service.dto.WithdrawStatusDTO;
 import com.payfix.packages.web.rest.errors.BadRequestAlertException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 /**
  * REST controller for managing {@link com.payfix.packages.domain.WithdrawStatus}.
  */
@@ -26,16 +26,12 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api")
 public class WithdrawStatusResource {
 
-    private final Logger log = LoggerFactory.getLogger(WithdrawStatusResource.class);
-
     private static final String ENTITY_NAME = "withdrawStatus";
-
+    private final Logger log = LoggerFactory.getLogger(WithdrawStatusResource.class);
+    private final WithdrawStatusService withdrawStatusService;
+    private final WithdrawStatusRepository withdrawStatusRepository;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final WithdrawStatusService withdrawStatusService;
-
-    private final WithdrawStatusRepository withdrawStatusRepository;
 
     public WithdrawStatusResource(WithdrawStatusService withdrawStatusService, WithdrawStatusRepository withdrawStatusRepository) {
         this.withdrawStatusService = withdrawStatusService;
@@ -66,7 +62,7 @@ public class WithdrawStatusResource {
     /**
      * {@code PUT  /withdraw-statuses/:id} : Updates an existing withdrawStatus.
      *
-     * @param id the id of the withdrawStatusDTO to save.
+     * @param id                the id of the withdrawStatusDTO to save.
      * @param withdrawStatusDTO the withdrawStatusDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated withdrawStatusDTO,
      * or with status {@code 400 (Bad Request)} if the withdrawStatusDTO is not valid,
@@ -95,42 +91,6 @@ public class WithdrawStatusResource {
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, withdrawStatusDTO.getId().toString()))
             .body(result);
-    }
-
-    /**
-     * {@code PATCH  /withdraw-statuses/:id} : Partial updates given fields of an existing withdrawStatus, field will ignore if it is null
-     *
-     * @param id the id of the withdrawStatusDTO to save.
-     * @param withdrawStatusDTO the withdrawStatusDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated withdrawStatusDTO,
-     * or with status {@code 400 (Bad Request)} if the withdrawStatusDTO is not valid,
-     * or with status {@code 404 (Not Found)} if the withdrawStatusDTO is not found,
-     * or with status {@code 500 (Internal Server Error)} if the withdrawStatusDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PatchMapping(value = "/withdraw-statuses/{id}", consumes = "application/merge-patch+json")
-    public ResponseEntity<WithdrawStatusDTO> partialUpdateWithdrawStatus(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody WithdrawStatusDTO withdrawStatusDTO
-    ) throws URISyntaxException {
-        log.debug("REST request to partial update WithdrawStatus partially : {}, {}", id, withdrawStatusDTO);
-        if (withdrawStatusDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, withdrawStatusDTO.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!withdrawStatusRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        Optional<WithdrawStatusDTO> result = withdrawStatusService.partialUpdate(withdrawStatusDTO);
-
-        return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, withdrawStatusDTO.getId().toString())
-        );
     }
 
     /**

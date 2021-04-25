@@ -40,22 +40,6 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
     }
 
     @Override
-    public Optional<DocumentTypeDTO> partialUpdate(DocumentTypeDTO documentTypeDTO) {
-        log.debug("Request to partially update DocumentType : {}", documentTypeDTO);
-
-        return documentTypeRepository
-            .findById(documentTypeDTO.getId())
-            .map(
-                existingDocumentType -> {
-                    documentTypeMapper.partialUpdate(existingDocumentType, documentTypeDTO);
-                    return existingDocumentType;
-                }
-            )
-            .map(documentTypeRepository::save)
-            .map(documentTypeMapper::toDto);
-    }
-
-    @Override
     @Transactional(readOnly = true)
     public Page<DocumentTypeDTO> findAll(Pageable pageable) {
         log.debug("Request to get all DocumentTypes");

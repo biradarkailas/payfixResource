@@ -6,26 +6,25 @@ import com.payfix.packages.service.LogoService;
 import com.payfix.packages.service.criteria.LogoCriteria;
 import com.payfix.packages.service.dto.LogoDTO;
 import com.payfix.packages.web.rest.errors.BadRequestAlertException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * REST controller for managing {@link com.payfix.packages.domain.Logo}.
@@ -34,18 +33,13 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api")
 public class LogoResource {
 
-    private final Logger log = LoggerFactory.getLogger(LogoResource.class);
-
     private static final String ENTITY_NAME = "logo";
-
+    private final Logger log = LoggerFactory.getLogger(LogoResource.class);
+    private final LogoService logoService;
+    private final LogoRepository logoRepository;
+    private final LogoQueryService logoQueryService;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final LogoService logoService;
-
-    private final LogoRepository logoRepository;
-
-    private final LogoQueryService logoQueryService;
 
     public LogoResource(LogoService logoService, LogoRepository logoRepository, LogoQueryService logoQueryService) {
         this.logoService = logoService;
@@ -76,7 +70,7 @@ public class LogoResource {
     /**
      * {@code PUT  /logos/:id} : Updates an existing logo.
      *
-     * @param id the id of the logoDTO to save.
+     * @param id      the id of the logoDTO to save.
      * @param logoDTO the logoDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated logoDTO,
      * or with status {@code 400 (Bad Request)} if the logoDTO is not valid,
@@ -105,42 +99,6 @@ public class LogoResource {
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, logoDTO.getId().toString()))
             .body(result);
-    }
-
-    /**
-     * {@code PATCH  /logos/:id} : Partial updates given fields of an existing logo, field will ignore if it is null
-     *
-     * @param id the id of the logoDTO to save.
-     * @param logoDTO the logoDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated logoDTO,
-     * or with status {@code 400 (Bad Request)} if the logoDTO is not valid,
-     * or with status {@code 404 (Not Found)} if the logoDTO is not found,
-     * or with status {@code 500 (Internal Server Error)} if the logoDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PatchMapping(value = "/logos/{id}", consumes = "application/merge-patch+json")
-    public ResponseEntity<LogoDTO> partialUpdateLogo(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody LogoDTO logoDTO
-    ) throws URISyntaxException {
-        log.debug("REST request to partial update Logo partially : {}, {}", id, logoDTO);
-        if (logoDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, logoDTO.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!logoRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        Optional<LogoDTO> result = logoService.partialUpdate(logoDTO);
-
-        return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, logoDTO.getId().toString())
-        );
     }
 
     /**

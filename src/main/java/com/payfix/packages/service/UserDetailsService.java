@@ -18,14 +18,6 @@ public interface UserDetailsService {
     UserDetailsDTO save(UserDetailsDTO userDetailsDTO);
 
     /**
-     * Partially updates a userDetails.
-     *
-     * @param userDetailsDTO the entity to update partially.
-     * @return the persisted entity.
-     */
-    Optional<UserDetailsDTO> partialUpdate(UserDetailsDTO userDetailsDTO);
-
-    /**
      * Get all the userDetails.
      *
      * @param pageable the pagination information.

@@ -20,7 +20,6 @@ import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -107,42 +106,6 @@ public class UserDetailsResource {
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, userDetailsDTO.getId().toString()))
             .body(result);
-    }
-
-    /**
-     * {@code PATCH  /user-details/:id} : Partial updates given fields of an existing userDetails, field will ignore if it is null
-     *
-     * @param id             the id of the userDetailsDTO to save.
-     * @param userDetailsDTO the userDetailsDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated userDetailsDTO,
-     * or with status {@code 400 (Bad Request)} if the userDetailsDTO is not valid,
-     * or with status {@code 404 (Not Found)} if the userDetailsDTO is not found,
-     * or with status {@code 500 (Internal Server Error)} if the userDetailsDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PatchMapping(value = "/user-details/{id}", consumes = "application/merge-patch+json")
-    public ResponseEntity<UserDetailsDTO> partialUpdateUserDetails(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody UserDetailsDTO userDetailsDTO
-    ) throws URISyntaxException {
-        log.debug("REST request to partial update UserDetails partially : {}, {}", id, userDetailsDTO);
-        if (userDetailsDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, userDetailsDTO.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!userDetailsRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        Optional<UserDetailsDTO> result = userDetailsService.partialUpdate(userDetailsDTO);
-
-        return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, userDetailsDTO.getId().toString())
-        );
     }
 
     /**

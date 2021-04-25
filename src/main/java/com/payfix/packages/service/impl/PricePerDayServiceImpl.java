@@ -5,13 +5,14 @@ import com.payfix.packages.repository.PricePerDayRepository;
 import com.payfix.packages.service.PricePerDayService;
 import com.payfix.packages.service.dto.PricePerDayDTO;
 import com.payfix.packages.service.mapper.PricePerDayMapper;
-import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 /**
  * Service Implementation for managing {@link PricePerDay}.
@@ -37,22 +38,6 @@ public class PricePerDayServiceImpl implements PricePerDayService {
         PricePerDay pricePerDay = pricePerDayMapper.toEntity(pricePerDayDTO);
         pricePerDay = pricePerDayRepository.save(pricePerDay);
         return pricePerDayMapper.toDto(pricePerDay);
-    }
-
-    @Override
-    public Optional<PricePerDayDTO> partialUpdate(PricePerDayDTO pricePerDayDTO) {
-        log.debug("Request to partially update PricePerDay : {}", pricePerDayDTO);
-
-        return pricePerDayRepository
-            .findById(pricePerDayDTO.getId())
-            .map(
-                existingPricePerDay -> {
-                    pricePerDayMapper.partialUpdate(existingPricePerDay, pricePerDayDTO);
-                    return existingPricePerDay;
-                }
-            )
-            .map(pricePerDayRepository::save)
-            .map(pricePerDayMapper::toDto);
     }
 
     @Override

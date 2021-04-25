@@ -1,6 +1,7 @@
 package com.payfix.packages.service;
 
 import com.payfix.packages.service.dto.LogoTransactionDTO;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -15,14 +16,6 @@ public interface LogoTransactionService {
      * @return the persisted entity.
      */
     LogoTransactionDTO save(LogoTransactionDTO logoTransactionDTO);
-
-    /**
-     * Partially updates a logoTransaction.
-     *
-     * @param logoTransactionDTO the entity to update partially.
-     * @return the persisted entity.
-     */
-    Optional<LogoTransactionDTO> partialUpdate(LogoTransactionDTO logoTransactionDTO);
 
     /**
      * Get all the logoTransactions.

@@ -6,13 +6,6 @@ import com.payfix.packages.service.LogoTransactionService;
 import com.payfix.packages.service.criteria.LogoTransactionCriteria;
 import com.payfix.packages.service.dto.LogoTransactionDTO;
 import com.payfix.packages.web.rest.errors.BadRequestAlertException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +14,13 @@ import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 /**
  * REST controller for managing {@link com.payfix.packages.domain.LogoTransaction}.
  */
@@ -28,18 +28,13 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api")
 public class LogoTransactionResource {
 
-    private final Logger log = LoggerFactory.getLogger(LogoTransactionResource.class);
-
     private static final String ENTITY_NAME = "logoTransaction";
-
+    private final Logger log = LoggerFactory.getLogger(LogoTransactionResource.class);
+    private final LogoTransactionService logoTransactionService;
+    private final LogoTransactionRepository logoTransactionRepository;
+    private final LogoTransactionQueryService logoTransactionQueryService;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final LogoTransactionService logoTransactionService;
-
-    private final LogoTransactionRepository logoTransactionRepository;
-
-    private final LogoTransactionQueryService logoTransactionQueryService;
 
     public LogoTransactionResource(
         LogoTransactionService logoTransactionService,
@@ -75,7 +70,7 @@ public class LogoTransactionResource {
     /**
      * {@code PUT  /logo-transactions/:id} : Updates an existing logoTransaction.
      *
-     * @param id the id of the logoTransactionDTO to save.
+     * @param id                 the id of the logoTransactionDTO to save.
      * @param logoTransactionDTO the logoTransactionDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated logoTransactionDTO,
      * or with status {@code 400 (Bad Request)} if the logoTransactionDTO is not valid,
@@ -104,42 +99,6 @@ public class LogoTransactionResource {
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, logoTransactionDTO.getId().toString()))
             .body(result);
-    }
-
-    /**
-     * {@code PATCH  /logo-transactions/:id} : Partial updates given fields of an existing logoTransaction, field will ignore if it is null
-     *
-     * @param id the id of the logoTransactionDTO to save.
-     * @param logoTransactionDTO the logoTransactionDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated logoTransactionDTO,
-     * or with status {@code 400 (Bad Request)} if the logoTransactionDTO is not valid,
-     * or with status {@code 404 (Not Found)} if the logoTransactionDTO is not found,
-     * or with status {@code 500 (Internal Server Error)} if the logoTransactionDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PatchMapping(value = "/logo-transactions/{id}", consumes = "application/merge-patch+json")
-    public ResponseEntity<LogoTransactionDTO> partialUpdateLogoTransaction(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody LogoTransactionDTO logoTransactionDTO
-    ) throws URISyntaxException {
-        log.debug("REST request to partial update LogoTransaction partially : {}, {}", id, logoTransactionDTO);
-        if (logoTransactionDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, logoTransactionDTO.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!logoTransactionRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        Optional<LogoTransactionDTO> result = logoTransactionService.partialUpdate(logoTransactionDTO);
-
-        return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, logoTransactionDTO.getId().toString())
-        );
     }
 
     /**

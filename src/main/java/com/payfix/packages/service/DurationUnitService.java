@@ -15,15 +15,6 @@ public interface DurationUnitService {
      * @return the persisted entity.
      */
     DurationUnitDTO save(DurationUnitDTO durationUnitDTO);
-
-    /**
-     * Partially updates a durationUnit.
-     *
-     * @param durationUnitDTO the entity to update partially.
-     * @return the persisted entity.
-     */
-    Optional<DurationUnitDTO> partialUpdate(DurationUnitDTO durationUnitDTO);
-
     /**
      * Get all the durationUnits.
      *

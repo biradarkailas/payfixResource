@@ -5,14 +5,15 @@ import com.payfix.packages.repository.WithdrawStatusRepository;
 import com.payfix.packages.service.WithdrawStatusService;
 import com.payfix.packages.service.dto.WithdrawStatusDTO;
 import com.payfix.packages.service.mapper.WithdrawStatusMapper;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link WithdrawStatus}.
@@ -38,22 +39,6 @@ public class WithdrawStatusServiceImpl implements WithdrawStatusService {
         WithdrawStatus withdrawStatus = withdrawStatusMapper.toEntity(withdrawStatusDTO);
         withdrawStatus = withdrawStatusRepository.save(withdrawStatus);
         return withdrawStatusMapper.toDto(withdrawStatus);
-    }
-
-    @Override
-    public Optional<WithdrawStatusDTO> partialUpdate(WithdrawStatusDTO withdrawStatusDTO) {
-        log.debug("Request to partially update WithdrawStatus : {}", withdrawStatusDTO);
-
-        return withdrawStatusRepository
-            .findById(withdrawStatusDTO.getId())
-            .map(
-                existingWithdrawStatus -> {
-                    withdrawStatusMapper.partialUpdate(existingWithdrawStatus, withdrawStatusDTO);
-                    return existingWithdrawStatus;
-                }
-            )
-            .map(withdrawStatusRepository::save)
-            .map(withdrawStatusMapper::toDto);
     }
 
     @Override

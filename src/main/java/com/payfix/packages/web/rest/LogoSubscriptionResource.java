@@ -6,13 +6,6 @@ import com.payfix.packages.service.LogoSubscriptionService;
 import com.payfix.packages.service.criteria.LogoSubscriptionCriteria;
 import com.payfix.packages.service.dto.LogoSubscriptionDTO;
 import com.payfix.packages.web.rest.errors.BadRequestAlertException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +14,13 @@ import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 /**
  * REST controller for managing {@link com.payfix.packages.domain.LogoSubscription}.
  */
@@ -28,18 +28,13 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api")
 public class LogoSubscriptionResource {
 
-    private final Logger log = LoggerFactory.getLogger(LogoSubscriptionResource.class);
-
     private static final String ENTITY_NAME = "logoSubscription";
-
+    private final Logger log = LoggerFactory.getLogger(LogoSubscriptionResource.class);
+    private final LogoSubscriptionService logoSubscriptionService;
+    private final LogoSubscriptionRepository logoSubscriptionRepository;
+    private final LogoSubscriptionQueryService logoSubscriptionQueryService;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final LogoSubscriptionService logoSubscriptionService;
-
-    private final LogoSubscriptionRepository logoSubscriptionRepository;
-
-    private final LogoSubscriptionQueryService logoSubscriptionQueryService;
 
     public LogoSubscriptionResource(
         LogoSubscriptionService logoSubscriptionService,
@@ -75,7 +70,7 @@ public class LogoSubscriptionResource {
     /**
      * {@code PUT  /logo-subscriptions/:id} : Updates an existing logoSubscription.
      *
-     * @param id the id of the logoSubscriptionDTO to save.
+     * @param id                  the id of the logoSubscriptionDTO to save.
      * @param logoSubscriptionDTO the logoSubscriptionDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated logoSubscriptionDTO,
      * or with status {@code 400 (Bad Request)} if the logoSubscriptionDTO is not valid,
@@ -104,42 +99,6 @@ public class LogoSubscriptionResource {
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, logoSubscriptionDTO.getId().toString()))
             .body(result);
-    }
-
-    /**
-     * {@code PATCH  /logo-subscriptions/:id} : Partial updates given fields of an existing logoSubscription, field will ignore if it is null
-     *
-     * @param id the id of the logoSubscriptionDTO to save.
-     * @param logoSubscriptionDTO the logoSubscriptionDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated logoSubscriptionDTO,
-     * or with status {@code 400 (Bad Request)} if the logoSubscriptionDTO is not valid,
-     * or with status {@code 404 (Not Found)} if the logoSubscriptionDTO is not found,
-     * or with status {@code 500 (Internal Server Error)} if the logoSubscriptionDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PatchMapping(value = "/logo-subscriptions/{id}", consumes = "application/merge-patch+json")
-    public ResponseEntity<LogoSubscriptionDTO> partialUpdateLogoSubscription(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody LogoSubscriptionDTO logoSubscriptionDTO
-    ) throws URISyntaxException {
-        log.debug("REST request to partial update LogoSubscription partially : {}, {}", id, logoSubscriptionDTO);
-        if (logoSubscriptionDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, logoSubscriptionDTO.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!logoSubscriptionRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        Optional<LogoSubscriptionDTO> result = logoSubscriptionService.partialUpdate(logoSubscriptionDTO);
-
-        return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, logoSubscriptionDTO.getId().toString())
-        );
     }
 
     /**

@@ -6,26 +6,25 @@ import com.payfix.packages.service.DocumentService;
 import com.payfix.packages.service.criteria.DocumentCriteria;
 import com.payfix.packages.service.dto.DocumentDTO;
 import com.payfix.packages.web.rest.errors.BadRequestAlertException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * REST controller for managing {@link com.payfix.packages.domain.Document}.
@@ -34,18 +33,13 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api")
 public class DocumentResource {
 
-    private final Logger log = LoggerFactory.getLogger(DocumentResource.class);
-
     private static final String ENTITY_NAME = "document";
-
+    private final Logger log = LoggerFactory.getLogger(DocumentResource.class);
+    private final DocumentService documentService;
+    private final DocumentRepository documentRepository;
+    private final DocumentQueryService documentQueryService;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final DocumentService documentService;
-
-    private final DocumentRepository documentRepository;
-
-    private final DocumentQueryService documentQueryService;
 
     public DocumentResource(
         DocumentService documentService,
@@ -80,7 +74,7 @@ public class DocumentResource {
     /**
      * {@code PUT  /documents/:id} : Updates an existing document.
      *
-     * @param id the id of the documentDTO to save.
+     * @param id          the id of the documentDTO to save.
      * @param documentDTO the documentDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated documentDTO,
      * or with status {@code 400 (Bad Request)} if the documentDTO is not valid,
@@ -109,42 +103,6 @@ public class DocumentResource {
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, documentDTO.getId().toString()))
             .body(result);
-    }
-
-    /**
-     * {@code PATCH  /documents/:id} : Partial updates given fields of an existing document, field will ignore if it is null
-     *
-     * @param id the id of the documentDTO to save.
-     * @param documentDTO the documentDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated documentDTO,
-     * or with status {@code 400 (Bad Request)} if the documentDTO is not valid,
-     * or with status {@code 404 (Not Found)} if the documentDTO is not found,
-     * or with status {@code 500 (Internal Server Error)} if the documentDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PatchMapping(value = "/documents/{id}", consumes = "application/merge-patch+json")
-    public ResponseEntity<DocumentDTO> partialUpdateDocument(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody DocumentDTO documentDTO
-    ) throws URISyntaxException {
-        log.debug("REST request to partial update Document partially : {}, {}", id, documentDTO);
-        if (documentDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, documentDTO.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!documentRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        Optional<DocumentDTO> result = documentService.partialUpdate(documentDTO);
-
-        return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, documentDTO.getId().toString())
-        );
     }
 
     /**

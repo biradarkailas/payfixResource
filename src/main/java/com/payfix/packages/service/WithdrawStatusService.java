@@ -17,14 +17,6 @@ public interface WithdrawStatusService {
     WithdrawStatusDTO save(WithdrawStatusDTO withdrawStatusDTO);
 
     /**
-     * Partially updates a withdrawStatus.
-     *
-     * @param withdrawStatusDTO the entity to update partially.
-     * @return the persisted entity.
-     */
-    Optional<WithdrawStatusDTO> partialUpdate(WithdrawStatusDTO withdrawStatusDTO);
-
-    /**
      * Get all the withdrawStatuses.
      *
      * @return the list of entities.

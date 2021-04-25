@@ -17,14 +17,6 @@ public interface CategoryService {
     CategoryDTO save(CategoryDTO categoryDTO);
 
     /**
-     * Partially updates a category.
-     *
-     * @param categoryDTO the entity to update partially.
-     * @return the persisted entity.
-     */
-    Optional<CategoryDTO> partialUpdate(CategoryDTO categoryDTO);
-
-    /**
      * Get all the categories.
      *
      * @return the list of entities.
