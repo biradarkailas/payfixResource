@@ -12,7 +12,7 @@
                                  baseTableName="user_member_ship"
                                  constraintName="fk_user_member_ship__user_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="jhi_user"/>
+                                 referencedTableName="user"/>
 
         <addForeignKeyConstraint baseColumnNames="member_ship_id"
                                  baseTableName="user_member_ship"
