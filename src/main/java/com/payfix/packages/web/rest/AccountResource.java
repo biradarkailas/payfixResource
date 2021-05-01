@@ -61,12 +61,13 @@ public class AccountResource {
      */
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public void registerAccount(@Valid @RequestBody AdminUserDTO adminUserDTO) {
+    public AdminUserDTO registerAccount(@Valid @RequestBody AdminUserDTO adminUserDTO) {
         if (isPasswordLengthInvalid(adminUserDTO.getPassword())) {
             throw new InvalidPasswordException();
         }
         User user = userService.registerUser(adminUserDTO, adminUserDTO.getPassword());
         //mailService.sendActivationEmail(user);
+        return userMapper.toDto(user);
     }
 
     /**
