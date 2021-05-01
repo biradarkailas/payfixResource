@@ -42,7 +42,7 @@
     "clientThemeVariant": "",
     "withAdminUi": true,
     "languages": ["en", "fr"],
-    "lastLiquibaseTimestamp": 1618943427000,
+    "lastLiquibaseTimestamp": 1619819615000,
     "entities": [
       "UserDetails",
       "BankAccount",
@@ -59,7 +59,8 @@
       "UserMemberShip",
       "Logo",
       "LogoSubscription",
-      "LogoTransaction"
+      "LogoTransaction",
+      "CompanyDetails"
     ]
   }
 }

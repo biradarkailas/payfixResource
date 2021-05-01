@@ -1,7 +1,5 @@
 package com.payfix.packages.service.dto;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -18,8 +16,6 @@ public class UserMemberShipDTO implements Serializable {
     private LocalDate endDate;
 
     private Long userId;
-
-    private String userName;
 
     private Long memberShipId;
 
@@ -55,14 +51,6 @@ public class UserMemberShipDTO implements Serializable {
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public Long getMemberShipId() {
         return memberShipId;
     }
@@ -93,16 +81,14 @@ public class UserMemberShipDTO implements Serializable {
     }
 
     // prettier-ignore
-
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-            .append("id", id)
-            .append("startDate", startDate)
-            .append("endDate", endDate)
-            .append("userId", userId)
-            .append("userName", userName)
-            .append("memberShipId", memberShipId)
-            .toString();
+        return "UserMemberShipDTO{" +
+            "id=" + getId() +
+            ", startDate='" + getStartDate() + "'" +
+            ", endDate='" + getEndDate() + "'" +
+            ", userId=" + getUserId() +
+            ", memberShipId=" + getMemberShipId() +
+            "}";
     }
 }

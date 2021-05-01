@@ -39,6 +39,7 @@ public class DurationServiceImpl implements DurationService {
         duration = durationRepository.save(duration);
         return durationMapper.toDto(duration);
     }
+
     @Override
     @Transactional(readOnly = true)
     public List<DurationDTO> findAll() {

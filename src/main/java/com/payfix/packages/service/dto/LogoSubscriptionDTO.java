@@ -1,5 +1,7 @@
 package com.payfix.packages.service.dto;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -34,6 +36,7 @@ public class LogoSubscriptionDTO implements Serializable {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
 
     public Long getUserId() {
         return userId;
@@ -73,13 +76,14 @@ public class LogoSubscriptionDTO implements Serializable {
     }
 
     // prettier-ignore
+
     @Override
     public String toString() {
-        return "LogoSubscriptionDTO{" +
-            "id=" + getId() +
-            ", date='" + getDate() + "'" +
-            ", userId=" + getUserId() +
-            ", logoId=" + getLogoId() +
-            "}";
+        return new ToStringBuilder(this)
+            .append("id", id)
+            .append("date", date)
+            .append("userId", userId)
+            .append("logoId", logoId)
+            .toString();
     }
 }

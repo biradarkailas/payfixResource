@@ -4,26 +4,25 @@ import com.payfix.packages.repository.MemberShipRepository;
 import com.payfix.packages.service.MemberShipService;
 import com.payfix.packages.service.dto.MemberShipDTO;
 import com.payfix.packages.web.rest.errors.BadRequestAlertException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * REST controller for managing {@link com.payfix.packages.domain.MemberShip}.
@@ -32,16 +31,12 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api")
 public class MemberShipResource {
 
-    private final Logger log = LoggerFactory.getLogger(MemberShipResource.class);
-
     private static final String ENTITY_NAME = "memberShip";
-
+    private final Logger log = LoggerFactory.getLogger(MemberShipResource.class);
+    private final MemberShipService memberShipService;
+    private final MemberShipRepository memberShipRepository;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final MemberShipService memberShipService;
-
-    private final MemberShipRepository memberShipRepository;
 
     public MemberShipResource(MemberShipService memberShipService, MemberShipRepository memberShipRepository) {
         this.memberShipService = memberShipService;
@@ -71,7 +66,7 @@ public class MemberShipResource {
     /**
      * {@code PUT  /member-ships/:id} : Updates an existing memberShip.
      *
-     * @param id the id of the memberShipDTO to save.
+     * @param id            the id of the memberShipDTO to save.
      * @param memberShipDTO the memberShipDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated memberShipDTO,
      * or with status {@code 400 (Bad Request)} if the memberShipDTO is not valid,

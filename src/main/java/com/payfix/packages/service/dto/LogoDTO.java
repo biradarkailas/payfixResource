@@ -1,5 +1,7 @@
 package com.payfix.packages.service.dto;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
@@ -122,18 +124,19 @@ public class LogoDTO implements Serializable {
     }
 
     // prettier-ignore
+
     @Override
     public String toString() {
-        return "LogoDTO{" +
-            "id=" + getId() +
-            ", imageUrl='" + getImageUrl() + "'" +
-            ", termConditions='" + getTermConditions() + "'" +
-            ", about='" + getAbout() + "'" +
-            ", user=" + getUserId() +
-            ", category=" + getCategoryId() +
-            ", duration=" + getDurationId() +
-            ", durationUnit=" + getDurationUnitId() +
-            ", pricePerDay=" + getPricePerDayId() +
-            "}";
+        return new ToStringBuilder(this)
+            .append("id", id)
+            .append("imageUrl", imageUrl)
+            .append("termConditions", termConditions)
+            .append("about", about)
+            .append("userId", userId)
+            .append("categoryId", categoryId)
+            .append("durationId", durationId)
+            .append("durationUnitId", durationUnitId)
+            .append("pricePerDayId", pricePerDayId)
+            .toString();
     }
 }

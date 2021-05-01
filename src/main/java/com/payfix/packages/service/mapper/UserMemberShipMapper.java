@@ -11,7 +11,6 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring", uses = {UserMapper.class, MemberShipMapper.class})
 public interface UserMemberShipMapper extends EntityMapper<UserMemberShipDTO, UserMemberShip> {
     @Mapping(source = "user.id", target = "userId")
-    @Mapping(source = "user.login", target = "userName")
     @Mapping(source = "memberShip.id", target = "memberShipId")
     UserMemberShipDTO toDto(UserMemberShip userMemberShip);
 

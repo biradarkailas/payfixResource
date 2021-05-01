@@ -1,9 +1,10 @@
 package com.payfix.packages.service;
 
 import com.payfix.packages.service.dto.LogoDTO;
-import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.Optional;
 
 /**
  * Service Interface for managing {@link com.payfix.packages.domain.Logo}.

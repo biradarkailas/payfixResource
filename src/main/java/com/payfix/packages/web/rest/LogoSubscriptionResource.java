@@ -101,6 +101,7 @@ public class LogoSubscriptionResource {
             .body(result);
     }
 
+
     /**
      * {@code GET  /logo-subscriptions} : get all the logoSubscriptions.
      *

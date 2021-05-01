@@ -1,5 +1,7 @@
 package com.payfix.packages.service.dto;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
@@ -92,15 +94,16 @@ public class MemberShipDTO implements Serializable {
     }
 
     // prettier-ignore
+
     @Override
     public String toString() {
-        return "MemberShipDTO{" +
-            "id=" + getId() +
-            ", title='" + getTitle() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", price=" + getPrice() +
-            ", durationId=" + getDurationId() +
-            ", durationUnitId=" + getDurationUnitId() +
-            "}";
+        return new ToStringBuilder(this)
+            .append("id", id)
+            .append("title", title)
+            .append("description", description)
+            .append("price", price)
+            .append("durationId", durationId)
+            .append("durationUnitId", durationUnitId)
+            .toString();
     }
 }

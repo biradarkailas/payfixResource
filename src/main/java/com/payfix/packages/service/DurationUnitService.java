@@ -1,6 +1,7 @@
 package com.payfix.packages.service;
 
 import com.payfix.packages.service.dto.DurationUnitDTO;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +16,7 @@ public interface DurationUnitService {
      * @return the persisted entity.
      */
     DurationUnitDTO save(DurationUnitDTO durationUnitDTO);
+
     /**
      * Get all the durationUnits.
      *

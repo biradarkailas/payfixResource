@@ -17,4 +17,13 @@ public interface LogoSubscriptionMapper extends EntityMapper<LogoSubscriptionDTO
     @Mapping(target = "user", source = "userId")
     @Mapping(target = "logo", source = "logoId")
     LogoSubscription toEntity(LogoSubscriptionDTO logoSubscriptionDTO);
+
+    default LogoSubscription fromId(Long id) {
+        if (id == null) {
+            return null;
+        }
+        LogoSubscription logoSubscription = new LogoSubscription();
+        logoSubscription.setId(id);
+        return logoSubscription;
+    }
 }

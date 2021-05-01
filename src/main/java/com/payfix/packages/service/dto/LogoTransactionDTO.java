@@ -1,5 +1,7 @@
 package com.payfix.packages.service.dto;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
@@ -82,14 +84,15 @@ public class LogoTransactionDTO implements Serializable {
     }
 
     // prettier-ignore
+
     @Override
     public String toString() {
-        return "LogoTransactionDTO{" +
-            "id=" + getId() +
-            ", amount=" + getAmount() +
-            ", userId=" + getUserId() +
-            ", logoId=" + getLogoId() +
-            ", transactionTypeId=" + getTransactionTypeId() +
-            "}";
+        return new ToStringBuilder(this)
+            .append("id", id)
+            .append("amount", amount)
+            .append("userId", userId)
+            .append("logoId", logoId)
+            .append("transactionTypeId", transactionTypeId)
+            .toString();
     }
 }

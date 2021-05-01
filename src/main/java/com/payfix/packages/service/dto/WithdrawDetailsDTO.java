@@ -1,5 +1,7 @@
 package com.payfix.packages.service.dto;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;
@@ -81,14 +83,15 @@ public class WithdrawDetailsDTO implements Serializable {
     }
 
     // prettier-ignore
+
     @Override
     public String toString() {
-        return "WithdrawDetailsDTO{" +
-            "id=" + getId() +
-            ", amount=" + getAmount() +
-            ", date='" + getDate() + "'" +
-            ", userId=" + getUserId() +
-            ", withdrawStatusId=" + getWithdrawStatusId() +
-            "}";
+        return new ToStringBuilder(this)
+            .append("id", id)
+            .append("amount", amount)
+            .append("date", date)
+            .append("userId", userId)
+            .append("withdrawStatusId", withdrawStatusId)
+            .toString();
     }
 }

@@ -25,12 +25,16 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class UserMemberShipResource {
 
-    private static final String ENTITY_NAME = "userMemberShip";
     private final Logger log = LoggerFactory.getLogger(UserMemberShipResource.class);
-    private final UserMemberShipService userMemberShipService;
-    private final UserMemberShipRepository userMemberShipRepository;
+
+    private static final String ENTITY_NAME = "userMemberShip";
+
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
+
+    private final UserMemberShipService userMemberShipService;
+
+    private final UserMemberShipRepository userMemberShipRepository;
 
     public UserMemberShipResource(UserMemberShipService userMemberShipService, UserMemberShipRepository userMemberShipRepository) {
         this.userMemberShipService = userMemberShipService;
@@ -61,7 +65,7 @@ public class UserMemberShipResource {
     /**
      * {@code PUT  /user-member-ships/:id} : Updates an existing userMemberShip.
      *
-     * @param id                the id of the userMemberShipDTO to save.
+     * @param id the id of the userMemberShipDTO to save.
      * @param userMemberShipDTO the userMemberShipDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated userMemberShipDTO,
      * or with status {@code 400 (Bad Request)} if the userMemberShipDTO is not valid,

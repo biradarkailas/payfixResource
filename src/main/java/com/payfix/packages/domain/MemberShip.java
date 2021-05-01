@@ -1,8 +1,8 @@
 package com.payfix.packages.domain;
 
-import java.io.Serializable;
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * A MemberShip.
@@ -51,17 +51,21 @@ public class MemberShip extends AbstractAuditingEntity implements Serializable {
         return this.title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public MemberShip title(String title) {
         this.title = title;
         return this;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getDescription() {
         return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public MemberShip description(String description) {
@@ -69,12 +73,12 @@ public class MemberShip extends AbstractAuditingEntity implements Serializable {
         return this;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Double getPrice() {
         return this.price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public MemberShip price(Double price) {
@@ -82,12 +86,12 @@ public class MemberShip extends AbstractAuditingEntity implements Serializable {
         return this;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
     public Duration getDuration() {
         return this.duration;
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
     }
 
     public MemberShip duration(Duration duration) {
@@ -95,21 +99,17 @@ public class MemberShip extends AbstractAuditingEntity implements Serializable {
         return this;
     }
 
-    public void setDuration(Duration duration) {
-        this.duration = duration;
-    }
-
     public DurationUnit getDurationUnit() {
         return this.durationUnit;
+    }
+
+    public void setDurationUnit(DurationUnit durationUnit) {
+        this.durationUnit = durationUnit;
     }
 
     public MemberShip durationUnit(DurationUnit durationUnit) {
         this.setDurationUnit(durationUnit);
         return this;
-    }
-
-    public void setDurationUnit(DurationUnit durationUnit) {
-        this.durationUnit = durationUnit;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

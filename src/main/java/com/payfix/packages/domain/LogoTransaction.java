@@ -1,10 +1,9 @@
 package com.payfix.packages.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import javax.persistence.*;
+import javax.validation.constraints.*;
 
 /**
  * A LogoTransaction.
@@ -28,7 +27,7 @@ public class LogoTransaction extends AbstractAuditingEntity implements Serializa
     private User user;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = {"user", "category", "duration", "durationUnit", "pricePerDay"}, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "category", "duration", "durationUnit", "pricePerDay" }, allowSetters = true)
     private Logo logo;
 
     @ManyToOne
@@ -52,21 +51,17 @@ public class LogoTransaction extends AbstractAuditingEntity implements Serializa
         return this.amount;
     }
 
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
-
     public LogoTransaction amount(Double amount) {
         this.amount = amount;
         return this;
     }
 
-    public User getUser() {
-        return this.user;
+    public void setAmount(Double amount) {
+        this.amount = amount;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public User getUser() {
+        return this.user;
     }
 
     public LogoTransaction user(User user) {
@@ -74,12 +69,12 @@ public class LogoTransaction extends AbstractAuditingEntity implements Serializa
         return this;
     }
 
-    public Logo getLogo() {
-        return this.logo;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void setLogo(Logo logo) {
-        this.logo = logo;
+    public Logo getLogo() {
+        return this.logo;
     }
 
     public LogoTransaction logo(Logo logo) {
@@ -87,17 +82,21 @@ public class LogoTransaction extends AbstractAuditingEntity implements Serializa
         return this;
     }
 
-    public TransactionType getTransactionType() {
-        return this.transactionType;
+    public void setLogo(Logo logo) {
+        this.logo = logo;
     }
 
-    public void setTransactionType(TransactionType transactionType) {
-        this.transactionType = transactionType;
+    public TransactionType getTransactionType() {
+        return this.transactionType;
     }
 
     public LogoTransaction transactionType(TransactionType transactionType) {
         this.setTransactionType(transactionType);
         return this;
+    }
+
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

@@ -3,6 +3,7 @@ package com.payfix.packages.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.payfix.packages.config.Constants;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
@@ -211,18 +212,22 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return getClass().hashCode();
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
-        return "User{" +
-            "login='" + login + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", email='" + email + '\'' +
-            ", imageUrl='" + imageUrl + '\'' +
-            ", activated='" + activated + '\'' +
-            ", langKey='" + langKey + '\'' +
-            ", activationKey='" + activationKey + '\'' +
-            "}";
+        return new ToStringBuilder(this)
+            .append("id", id)
+            .append("login", login)
+            .append("password", password)
+            .append("firstName", firstName)
+            .append("lastName", lastName)
+            .append("email", email)
+            .append("activated", activated)
+            .append("langKey", langKey)
+            .append("imageUrl", imageUrl)
+            .append("activationKey", activationKey)
+            .append("resetKey", resetKey)
+            .append("resetDate", resetDate)
+            .append("authorities", authorities)
+            .toString();
     }
 }

@@ -4,13 +4,13 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
     <!--
-        Added the constraints for entity UserDetails.
+        Added the constraints for entity CompanyDetails.
     -->
-    <changeSet id="20210418170851-2" author="jhipster">
+    <changeSet id="20210430215335-2" author="jhipster">
 
         <addForeignKeyConstraint baseColumnNames="id"
-                                 baseTableName="user_details"
-                                 constraintName="fk_user_details__user_id"
+                                 baseTableName="company_details"
+                                 constraintName="fk_company_details__user_id"
                                  referencedColumnNames="id"
                                  referencedTableName="user"/>
     </changeSet>

@@ -1,7 +1,15 @@
 {
   "fields": [
     {
-      "fieldName": "companyName",
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "city",
       "fieldType": "String"
     },
     {
@@ -11,15 +19,6 @@
     {
       "fieldName": "registrationDate",
       "fieldType": "LocalDate"
-    },
-    {
-      "fieldName": "balance",
-      "fieldType": "Double"
-    },
-    {
-      "fieldName": "mobileNumber",
-      "fieldType": "Integer",
-      "fieldValidateRules": []
     }
   ],
   "relationships": [
@@ -31,14 +30,14 @@
       "otherEntityField": "login",
       "ownerSide": true,
       "id": true,
-      "otherEntityRelationshipName": "userDetails"
+      "otherEntityRelationshipName": "companyDetails"
     }
   ],
   "service": "serviceImpl",
   "dto": "mapstruct",
-  "jpaMetamodelFiltering": true,
+  "jpaMetamodelFiltering": false,
   "readOnly": false,
   "pagination": "pagination",
-  "name": "UserDetails",
-  "changelogDate": "20210418170851"
+  "name": "CompanyDetails",
+  "changelogDate": "20210430215335"
 }

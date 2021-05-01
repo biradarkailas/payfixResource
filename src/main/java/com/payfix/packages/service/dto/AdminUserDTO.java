@@ -1,52 +1,46 @@
 package com.payfix.packages.service.dto;
 
 import com.payfix.packages.config.Constants;
-import com.payfix.packages.domain.Authority;
-import com.payfix.packages.domain.User;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.time.Instant;
 import java.util.Set;
-import java.util.stream.Collectors;
-import javax.validation.constraints.*;
 
 /**
  * A DTO representing a user, with his authorities.
  */
 public class AdminUserDTO {
 
+    public static final int PASSWORD_MIN_LENGTH = 4;
+    public static final int PASSWORD_MAX_LENGTH = 100;
     private Long id;
-
     @NotBlank
     @Pattern(regexp = Constants.LOGIN_REGEX)
     @Size(min = 1, max = 50)
     private String login;
-
     @Size(max = 50)
     private String firstName;
-
     @Size(max = 50)
     private String lastName;
-
     @Email
     @Size(min = 5, max = 254)
     private String email;
-
     @Size(max = 256)
     private String imageUrl;
-
     private boolean activated = true;
-
     @Size(min = 2, max = 10)
     private String langKey;
-
     private String createdBy;
-
     private Instant createdDate;
-
     private String lastModifiedBy;
-
     private Instant lastModifiedDate;
-
     private Set<String> authorities;
+    @Size(min = PASSWORD_MIN_LENGTH, max = PASSWORD_MAX_LENGTH)
+    private String password;
 
     public AdminUserDTO() {
         // Empty constructor needed for Jackson.
@@ -156,22 +150,31 @@ public class AdminUserDTO {
         this.authorities = authorities;
     }
 
-    // prettier-ignore
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
-        return "AdminUserDTO{" +
-            "login='" + login + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", email='" + email + '\'' +
-            ", imageUrl='" + imageUrl + '\'' +
-            ", activated=" + activated +
-            ", langKey='" + langKey + '\'' +
-            ", createdBy=" + createdBy +
-            ", createdDate=" + createdDate +
-            ", lastModifiedBy='" + lastModifiedBy + '\'' +
-            ", lastModifiedDate=" + lastModifiedDate +
-            ", authorities=" + authorities +
-            "}";
+        return new ToStringBuilder(this)
+            .append("id", id)
+            .append("login", login)
+            .append("firstName", firstName)
+            .append("lastName", lastName)
+            .append("email", email)
+            .append("imageUrl", imageUrl)
+            .append("activated", activated)
+            .append("langKey", langKey)
+            .append("createdBy", createdBy)
+            .append("createdDate", createdDate)
+            .append("lastModifiedBy", lastModifiedBy)
+            .append("lastModifiedDate", lastModifiedDate)
+            .append("authorities", authorities)
+            .append("password", password)
+            .toString();
     }
 }

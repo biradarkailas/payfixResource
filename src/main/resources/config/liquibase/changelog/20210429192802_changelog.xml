@@ -1,0 +1,91 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="Lenovo (generated)" id="1619724498840-1">
+        <addColumn tableName="category">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1619724498840-2">
+        <addColumn tableName="logo">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1619724498840-3">
+        <addColumn tableName="logo_transaction">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1619724498840-4">
+        <addColumn tableName="member_ship">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1619724498840-5">
+        <addColumn tableName="category">
+            <column name="created_date" type="datetime(6)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1619724498840-6">
+        <addColumn tableName="logo">
+            <column name="created_date" type="datetime(6)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1619724498840-7">
+        <addColumn tableName="logo_transaction">
+            <column name="created_date" type="datetime(6)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1619724498840-8">
+        <addColumn tableName="member_ship">
+            <column name="created_date" type="datetime(6)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1619724498840-9">
+        <addColumn tableName="category">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1619724498840-10">
+        <addColumn tableName="logo">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1619724498840-11">
+        <addColumn tableName="logo_transaction">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1619724498840-12">
+        <addColumn tableName="member_ship">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1619724498840-13">
+        <addColumn tableName="category">
+            <column name="last_modified_date" type="datetime(6)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1619724498840-14">
+        <addColumn tableName="logo">
+            <column name="last_modified_date" type="datetime(6)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1619724498840-15">
+        <addColumn tableName="logo_transaction">
+            <column name="last_modified_date" type="datetime(6)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1619724498840-16">
+        <addColumn tableName="member_ship">
+            <column name="last_modified_date" type="datetime(6)"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

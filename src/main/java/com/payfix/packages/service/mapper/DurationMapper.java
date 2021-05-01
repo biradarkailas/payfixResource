@@ -9,7 +9,6 @@ import org.mapstruct.Mapper;
  */
 @Mapper(componentModel = "spring", uses = {})
 public interface DurationMapper extends EntityMapper<DurationDTO, Duration> {
-
     DurationDTO toDto(Duration duration);
 
     Duration toEntity(DurationDTO durationDTO);
