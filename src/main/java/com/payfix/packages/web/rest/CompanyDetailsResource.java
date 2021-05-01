@@ -51,7 +51,7 @@ public class CompanyDetailsResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new companyDetailsDTO, or with status {@code 400 (Bad Request)} if the companyDetails has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PostMapping("/company-details")
+    @PostMapping("/company-details/save")
     public ResponseEntity<CompanyDetailsDTO> createCompanyDetails(@Valid @RequestBody CompanyDetailsDTO companyDetailsDTO)
         throws URISyntaxException {
         log.debug("REST request to save CompanyDetails : {}", companyDetailsDTO);
